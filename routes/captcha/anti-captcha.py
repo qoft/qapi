@@ -26,7 +26,7 @@ def _anti_captcha(key):
 def _anti_captcha_input():
     if request.args:
         print(f"/{request.args['key']}")
-        return redirect(f"/captcha/anti-captcha/{request.args['key']}", code=302)
+        return redirect(f"/keys/anti-captcha/{request.args['key']}", code=302)
     return render_template("input.html", type="anti-captcha", title="anti-captcha")
 
 

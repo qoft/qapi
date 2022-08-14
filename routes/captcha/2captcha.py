@@ -30,7 +30,7 @@ def _2captcha(key):
 def _2captcha_input():
     if request.args:
         print(f"/{request.args['key']}")
-        return redirect(f"/captcha/2captcha/{request.args['key']}", code=302)
+        return redirect(f"/keys/2captcha/{request.args['key']}", code=302)
     return render_template("input.html", type="2captcha", title="2captcha")
 
 

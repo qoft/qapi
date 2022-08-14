@@ -29,7 +29,7 @@ def _hotmailbox(key):
 def _hotmailbox_input():
     if request.args:
         print(f"/{request.args['key']}")
-        return redirect(f"/captcha/hotmailbox/{request.args['key']}", code=302)
+        return redirect(f"/keys/hotmailbox/{request.args['key']}", code=302)
     return render_template("input.html", type="hotmailbox", title="Hotmailbox")
 
 

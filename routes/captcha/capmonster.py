@@ -10,8 +10,10 @@ blueprint = flask.Blueprint('capmonster', __name__)
 def _capmonster(key):
     if len(key) != 32:
         return utils.view({"error": True, "message": "bad key", "type": "capmonster"})
-
-    sex = httpx.post(f"https://api.capmonster/getBalance", json={"clientKey": key}).json()
+    try:
+        sex = httpx.post(f"https://api.capmonster.cloud/getbalance", json={"clientKey": key}).json()
+    except httpx._exceptions.ConnectError:
+        return jsonify({"error": True, "message": "error connecting to capmonster.cloud"})
     json = dict()
     json.update({"type": "Capmonster"})
     match sex["errorId"]:
@@ -26,7 +28,7 @@ def _capmonster(key):
 def _capmonster_input():
     if request.args:
         print(f"/{request.args['key']}")
-        return redirect(f"/captcha/capmonster/{request.args['key']}", code=302)
+        return redirect(f"/keys/capmonster/{request.args['key']}", code=302)
     return render_template("input.html", type="capmonster", title="Capmonster")
 
 
