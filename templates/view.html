@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+		<style>
+			body{
+			background:
+			rgb(26, 32, 44);
+			}
+			.rectangle {
+                height: 100px ;
+                width: 25%;
+                color: white;
+                display: flex;
+                background-color: rgb(45, 55, 72);
+                border-radius: 7px;
+                justify-content: center;
+                align-items: center;
+                font-family: "Nunito", sans-serif;
+                font-size: 20px;
+                Vertical-align:middle;
+                box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			.centerXAndY {
+                height: calc(100vh - 300px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+			}
+            .centerX {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .title {
+                font-size: 56px;
+                font-family: "Nunito", sans-serif;
+                color: white;
+                padding-top: 65px;
+            }
+
+		</style>
+	</head>
+	<body>
+        <div class="centerX">
+            <div class="title">
+                {{ title }}
+            </div>
+        </div>
+
+		<div class="centerXAndY">
+			<div class="rectangle">
+				Balance: ${{ balance }} USD
+                {% if title == "Hotmailbox" %}
+                    <br>
+                    (Might not be accurate)
+                {% endif %}
+                <br>
+                {% if error %}
+                    Error: {{ message }}
+                {% endif %}
+			</div>
+		</div>
+	</body>
+</html>
