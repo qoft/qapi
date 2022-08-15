@@ -18,10 +18,10 @@ def page_not_found(e):
     return redirect(url_for('index'), code=302)
 
 
-@app.before_request
-def force_https():
-    if request.endpoint in app.view_functions and not request.is_secure:
-        return redirect(request.url.replace('http://', 'https://'))
+# @app.before_request
+# def force_https():
+#     if request.endpoint in app.view_functions and not request.is_secure:
+#         return redirect(request.url.replace('http://', 'https://'))
 
 
 @app.route("/")
