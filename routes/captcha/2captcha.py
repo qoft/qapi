@@ -1,13 +1,14 @@
 import flask
 import httpx
 from flask import render_template, request, redirect
+import config
 
 from utils import view
 
 blueprint = flask.Blueprint('2captcha', __name__)
 
 
-@blueprint.route("/keys/2captcha/<string:key>", methods=['GET'])
+@blueprint.route(f"{config.captcha_route}/2captcha/<string:key>", methods=['GET'])
 def _2captcha(key):
     if len(key) != 32:
         return view({"error": True, "message": "bad key", "type": "2captcha"})
@@ -26,11 +27,11 @@ def _2captcha(key):
     return view(message)
 
 
-@blueprint.route("/keys/2captcha/", methods=['GET'])
+@blueprint.route(f"{config.captcha_route}/2captcha/", methods=['GET'])
 def _2captcha_input():
     if request.args:
         print(f"/{request.args['key']}")
-        return redirect(f"/keys/2captcha/{request.args['key']}", code=302)
+        return redirect(f"{config.captcha_route}/2captcha/{request.args['key']}", code=302)
     return render_template("input.html", type="2captcha", title="2captcha")
 
 

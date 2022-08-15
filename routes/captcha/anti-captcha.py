@@ -2,11 +2,11 @@ import flask
 from flask import render_template, request, redirect, url_for, flash, jsonify
 import httpx
 import utils
-
+import config
 blueprint = flask.Blueprint('anti-captcha', __name__)
 
 
-@blueprint.route("/keys/anti-captcha/<string:key>", methods=['GET'])
+@blueprint.route(f"{config.captcha_route}/anti-captcha/<string:key>", methods=['GET'])
 def _anti_captcha(key):
     if len(key) != 32:
         return utils.view({"error": True, "message": "bad key", "type": "anti-captcha"})
@@ -22,11 +22,11 @@ def _anti_captcha(key):
     return utils.view(json)
 
 
-@blueprint.route("/keys/anti-captcha/", methods=['GET'])
+@blueprint.route(f"{config.captcha_route}/anti-captcha/", methods=['GET'])
 def _anti_captcha_input():
     if request.args:
         print(f"/{request.args['key']}")
-        return redirect(f"/keys/anti-captcha/{request.args['key']}", code=302)
+        return redirect(f"{config.captcha_route}/anti-captcha/{request.args['key']}", code=302)
     return render_template("input.html", type="anti-captcha", title="anti-captcha")
 
 

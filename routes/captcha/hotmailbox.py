@@ -1,7 +1,7 @@
 import flask
 import httpx
 from flask import render_template, request, redirect
-
+import config
 
 
 import utils
@@ -9,7 +9,7 @@ import utils
 blueprint = flask.Blueprint('hotmailbox', __name__)
 
 
-@blueprint.route("/keys/hotmailbox/<string:key>", methods=['GET'])
+@blueprint.route(f"{config.captcha_route}/hotmailbox/<string:key>", methods=['GET'])
 def _hotmailbox(key):
     if len(key) != 32:
         return utils.view({"error": True, "message": "bad key", "type": "capmonster"})
@@ -25,11 +25,11 @@ def _hotmailbox(key):
     return utils.view(json)
 
 
-@blueprint.route("/keys/hotmailbox/", methods=['GET'])
+@blueprint.route(f"{config.captcha_route}/hotmailbox/", methods=['GET'])
 def _hotmailbox_input():
     if request.args:
         print(f"/{request.args['key']}")
-        return redirect(f"/keys/hotmailbox/{request.args['key']}", code=302)
+        return redirect(f"{config.captcha_route}/hotmailbox/{request.args['key']}", code=302)
     return render_template("input.html", type="hotmailbox", title="Hotmailbox")
 
 

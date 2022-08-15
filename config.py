@@ -1,0 +1,1 @@
+captcha_route = "/captcha"
