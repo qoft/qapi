@@ -21,8 +21,7 @@ def page_not_found(e):
 def before_request():
     if not request.is_secure:
         url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)
+        return redirect(url)
 
 
 @app.route("/")
