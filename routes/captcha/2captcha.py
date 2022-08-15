@@ -29,7 +29,6 @@ def _2captcha(key):
 @blueprint.route(f"{config.captcha_route}/2captcha/", methods=['GET'])
 def _2captcha_input():
     if request.args:
-        print(f"/{request.args['key']}")
         return redirect(f"{config.captcha_route}/2captcha/{request.args['key']}", code=302)
     return render_template("input.html", type="2captcha", title="2captcha")
 

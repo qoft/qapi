@@ -26,7 +26,7 @@
     <label for="nameField" class="endpoint">{{ route.capitalize() }} Endpoints</label>
     <pre>
     {% for endpoint in routes[route] %}
-        GET <a href="{{ request.base_url }}{{ endpoint[0] }}">{{ endpoint[0] }}&lt;key&gt;</a>
+        GET <a href="{{ request.base_url }}{{ endpoint[0] }}">{{ endpoint[0] }}{{ "&lt;key&gt;" if endpoint[2] }}</a>
     {% endfor %}</pre>
     {% endfor %}
     </main>
