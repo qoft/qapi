@@ -1,1 +1,1 @@
-captcha_route = "captcha"
+captcha_route = "/captcha"
