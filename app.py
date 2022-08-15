@@ -1,3 +1,4 @@
+import utils
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 
 import os, importlib
@@ -20,25 +21,12 @@ def page_not_found(e):
 def index():
     links = []
     for rule in app.url_map.iter_rules():
-        # Filter out rules we can't navigate to in a browser
-        # and rules that require parameters
-        if "GET" in rule.methods and has_no_empty_params(rule):
+        if "GET" in rule.methods and utils.has_no_empty_params(rule):
             url = url_for(rule.endpoint, **(rule.defaults or {}))
-            if url == "/":
-                continue
-            links.append((url, rule.endpoint))
-    print(links)
+            if url != "/":
+                links.append((url, rule.endpoint))
     return render_template("index.html", links=links)
 
 
-def has_no_empty_params(rule):
-    defaults = rule.defaults if rule.defaults is not None else ()
-    arguments = rule.arguments if rule.arguments is not None else ()
-    return len(defaults) >= len(arguments)
-
-
-
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
