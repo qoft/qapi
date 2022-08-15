@@ -5,7 +5,6 @@ from currency import convert_currency
 def view(json):
     if request.headers.get('Content-Type') == 'application/json':
         return jsonify(json)
-    print(json)
     return render_template(
         'view.html',
         error=json["error"],

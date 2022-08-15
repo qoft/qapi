@@ -2,7 +2,6 @@ import flask
 import httpx
 from flask import render_template, request, redirect
 import config
-
 from utils import view
 
 blueprint = flask.Blueprint('2captcha', __name__)

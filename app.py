@@ -2,14 +2,12 @@ import utils
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 import os, importlib, sys
 
-links = dict()
 
 app = Flask(__name__)
 app.static_folder = "static"
 for route_folder in os.listdir("routes"):
     if route_folder.startswith("__"):
         continue
-    links.update({route_folder: []})
     for route_file in os.listdir(f"routes/{route_folder}"):
         if route_file.endswith(".py"):
             lib = importlib.import_module(f"routes.{route_folder}.{route_file[:-3]}")

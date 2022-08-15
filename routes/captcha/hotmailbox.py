@@ -28,7 +28,6 @@ def _hotmailbox(key):
 @blueprint.route(f"{config.captcha_route}/hotmailbox/", methods=['GET'])
 def _hotmailbox_input():
     if request.args:
-        print(f"/{request.args['key']}")
         return redirect(f"{config.captcha_route}/hotmailbox/{request.args['key']}", code=302)
     return render_template("input.html", type="hotmailbox", title="Hotmailbox")
 

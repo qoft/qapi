@@ -25,7 +25,6 @@ def _anti_captcha(key):
 @blueprint.route(f"{config.captcha_route}/anti-captcha/", methods=['GET'])
 def _anti_captcha_input():
     if request.args:
-        print(f"/{request.args['key']}")
         return redirect(f"{config.captcha_route}/anti-captcha/{request.args['key']}", code=302)
     return render_template("input.html", type="anti-captcha", title="anti-captcha")
 

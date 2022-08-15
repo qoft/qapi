@@ -28,7 +28,6 @@ def _capmonster(key):
 @blueprint.route(f"{config.captcha_route}/capmonster/", methods=['GET'])
 def _capmonster_input():
     if request.args:
-        print(f"/{request.args['key']}")
         return redirect(f"{config.captcha_route}/capmonster/{request.args['key']}", code=302)
     return render_template("input.html", type="capmonster", title="Capmonster")
 
