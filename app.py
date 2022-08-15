@@ -1,9 +1,11 @@
 import utils
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask_sslify import SSLify
 
 import os, importlib
 
 app = Flask(__name__)
+sslify = SSLify(app)
 app.static_folder = "static"
 for route_folder in os.listdir("routes"):
     for route_file in os.listdir(f"routes/{route_folder}"):
